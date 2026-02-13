@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CuteMeter ❤️</title>
+<style>
+body{
+margin:0;
+padding:0;
+font-family:'Arial',sans-serif;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+text-align:center;
+color:white;
+}
+.container{
+background:rgba(0,0,0,0.25);
+padding:30px;
+border-radius:20px;
+width:90%;
+max-width:400px;
+}
+button{
+background:#ff4d6d;
+border:none;
+padding:15px 25px;
+border-radius:30px;
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+.progress{
+width:100%;
+background:#fff;
+border-radius:20px;
+overflow:hidden;
+margin-top:20px;
+display:none;
+}
+.bar{
+width:0%;
+height:20px;
+background:#ff4d6d;
+transition:0.3s;
+}
+.hidden{display:none;}
+.heart{
+font-size:60px;
+animation:pulse 1s infinite;
+}
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.2);}
+100%{transform:scale(1);}
+}
+.compliment{
+margin-top:15px;
+font-size:20px;
+animation:fade 1s ease;
+}
+@keyframes fade{
+from{opacity:0;}
+to{opacity:1;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div id="step1">
+<div class="heart">❤️</div>
+<h2>Open My Heart</h2>
+<button onclick="start()">Open ❤️</button>
+</div>
+
+<div id="step2" class="hidden">
+<h3>Measuring Simmiye's cuteness... 😍</h3>
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+</div>
+
+<div id="step3" class="hidden">
+<h2>Cuteness Level 💖</h2>
+<h1>100000% 😍</h1>
+<div id="compliments"></div>
+</div>
+</div>
+
+<script>
+const compliments=[
+"You’re my peace 😌",
+"You’re my happiness 😊",
+"You’re my comfort 🫶",
+"You’re my favorite person ❤️",
+"You’re my forever ♾️💍",
+"You’re my heart 💖"
+];
+
+function start(){
+document.getElementById('step1').classList.add('hidden');
+document.getElementById('step2').classList.remove('hidden');
+document.querySelector('.progress').style.display='block';
+let bar=document.getElementById('bar');
+let width=0;
+let interval=setInterval(()=>{
+width++;
+bar.style.width=width+'%';
+if(width>=100){
+clearInterval(interval);
+setTimeout(showResult,500);
+}
+},30);
+}
+
+function showResult(){
+document.getElementById('step2').classList.add('hidden');
+document.getElementById('step3').classList.remove('hidden');
+let i=0;
+let compDiv=document.getElementById('compliments');
+let interval=setInterval(()=>{
+if(i<compliments.length){
+let p=document.createElement('div');
+p.className='compliment';
+p.innerText=compliments[i];
+compDiv.appendChild(p);
+i++;
+}else{
+clearInterval(interval);
+}
+},800);
+}
+</script>
+</body>
+</html>
